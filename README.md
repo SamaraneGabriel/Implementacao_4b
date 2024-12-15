@@ -15,8 +15,15 @@ g++ -o programa *.cpp -std=c++17
 A imagem deve estar no formato .ppm (P3 - Formato legível)
 
 # Comando Python
+
 Nosso código utiliza um script python. 
-- Certifique de possuir o pip instalado para as bibiliotecas corretas serem instaladas.
-- Caso você utilize o comando 'python3 arquivo.py' para executar um programa python, você deve alterar a linha 134 do arquivo Grafo.cpp:
+
+- Certifique de possuir o pip instalado para as bibliotecas corretas serem instaladas.
+- Caso você utilize o comando `python3 arquivo.py` para executar um programa python, você deve alterar a linha 134 do arquivo `Grafo.cpp`:
+    ```cpp
     "string command = "python probabilidade-2.py " + json_path;"
-    Altere para: "string command = "python3 probabilidade-2.py " + json_path;"
+    ```
+    Altere para:
+    ```cpp
+    "string command = "python3 probabilidade-2.py " + json_path;"
+    ```
