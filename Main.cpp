@@ -1,7 +1,6 @@
 #include "Grafo.h"
 #include "ImageHandler.h"
 #include "Pixel.h"
-// #include "Segmentacao.h"
 #include <vector>
 #include <iostream>
 #include <unordered_set>
@@ -14,7 +13,7 @@
 // Para Compilar use:
 // g++ -o programa *.cpp -std=c++17
 
-void importarBibiliotecas()
+bool importarBibiliotecas()
 {
   string command = "pip install numpy pillow scikit-learn scipy tqdm joblib";
 
@@ -22,13 +21,19 @@ void importarBibiliotecas()
 
   if (result != 0)
   {
-    cerr << "Erro ao importar as bibiliotecas, certifique que você possua o pip instalado." << endl;
+    return false;
   }
+  return true;
 }
 
 int main()
 {
-  importarBibiliotecas();
+
+  if (!importarBibiliotecas())
+  {
+    cerr << "Erro ao importar as bibiliotecas, certifique que você possua o pip instalado." << endl;
+    return 1;
+  }
 
   ImageHandler ih("imagens-ppm/cachorro.ppm");
 
