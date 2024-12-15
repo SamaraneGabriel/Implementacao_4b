@@ -82,7 +82,7 @@ void ImageHandler::saveImage(unordered_map<int, int> &hashComponentes, vector<Ve
         Pixel(0, 0, static_cast<uint8_t>(255), static_cast<uint8_t>(255), static_cast<uint8_t>(255)), // Branco
     };
 
-    ofstream file("output.ppm");
+    ofstream file("cavalos.ppm");
 
     if (!file.is_open())
     {

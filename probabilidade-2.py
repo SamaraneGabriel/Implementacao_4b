@@ -7,6 +7,7 @@ from scipy.stats import norm
 from tqdm import tqdm
 from joblib import Parallel, delayed
 
+
 def calcular_distribuicoes_gmm(imagem_flat, labels, centers):
     """
     Calcula médias e desvios padrão para foreground e background baseados nos clusters do K-Means.
@@ -20,6 +21,7 @@ def calcular_distribuicoes_gmm(imagem_flat, labels, centers):
 
     return fg_dist, bg_dist
 
+
 def calcular_t_link_capacidade_gaussiana(pixel_x, pixel_y, imagem_array, fg_dist, bg_dist):
     """
     Calcula as capacidades das arestas t-link de um pixel baseado nas distribuições Gaussianas.
@@ -28,10 +30,12 @@ def calcular_t_link_capacidade_gaussiana(pixel_x, pixel_y, imagem_array, fg_dist
     pixel_intensidade = imagem_array[pixel_y, pixel_x]
 
     # Calcular as probabilidades
-    source_capacity = -np.log(fg_dist.pdf(pixel_intensidade) + 1e-10)  # Evitar log(0)
+    source_capacity = - \
+        np.log(fg_dist.pdf(pixel_intensidade) + 1e-10)  # Evitar log(0)
     sink_capacity = -np.log(bg_dist.pdf(pixel_intensidade) + 1e-10)
 
     return source_capacity, sink_capacity
+
 
 def processar_imagem_e_calcular_capacidades_gaussianas(imagem_path, pixels, clusters=2):
     """
@@ -59,12 +63,14 @@ def processar_imagem_e_calcular_capacidades_gaussianas(imagem_path, pixels, clus
 
     return resultados
 
+
 def converter_para_cinza(imagem_path, output_path):
     """
     Converte uma imagem RGB para escala de cinza e salva o resultado.
     """
     imagem = Image.open(imagem_path).convert("L")
     imagem.save(output_path)
+
 
 def main():
     if len(sys.argv) != 2:
@@ -97,11 +103,13 @@ def main():
     converter_para_cinza(image_path, cinza_path)
 
     # Processar a imagem e calcular capacidades
-    resultados = processar_imagem_e_calcular_capacidades_gaussianas(cinza_path, pixels)
+    resultados = processar_imagem_e_calcular_capacidades_gaussianas(
+        cinza_path, pixels)
 
     # Retornar os resultados em formato simples
     for result in resultados:
         print(f"{result[0]} {result[1]}")
+
 
 if __name__ == "__main__":
     main()
