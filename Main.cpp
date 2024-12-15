@@ -14,25 +14,33 @@
 // Para Compilar use:
 // g++ -o programa *.cpp -std=c++17
 
+void importarBibiliotecas()
+{
+  string command = "pip install numpy pillow scikit-learn scipy tqdm joblib";
+
+  int result = system(command.c_str());
+
+  if (result != 0)
+  {
+    cerr << "Erro ao importar as bibiliotecas, certifique que você possua o pip instalado." << endl;
+  }
+}
+
 int main()
 {
+  importarBibiliotecas();
 
-  ImageHandler ih("150x150.ppm");
+  ImageHandler ih("imagens-ppm/cachorro.ppm");
 
   vector<Pixel> pixels = ih.loadImage();
 
   Grafo grafo;
 
   grafo.geraGrid(pixels);
-  // grafo.criaArestas();
   grafo.criarArestasTerminais(ih.getPath());
   cout << "Criou todas arestas" << endl;
 
   vector<Aresta> arestas = grafo.getArestas();
-  // for (Aresta &a : arestas)
-  // {
-  //   cout << a.getU() << " " << a.getV() << " " << a.getW() << endl;
-  // }
 
   FordFulkerson ff(grafo);
   unordered_map<int, int> minCutSet;
@@ -43,8 +51,6 @@ int main()
   cout << "Corte mínimo (vértices no lado do source): ";
 
   ih.saveImage(minCutSet, grafo.getVertices());
-
-  // cout << endl;
 
   return 0;
 }
