@@ -141,7 +141,7 @@ int main()
     //          << ", Sink Capacity: " << capacities[i].second << endl;
     // }
 
-    ImageHandler ih("cavalo.ppm");
+    ImageHandler ih("quadradoPreto.ppm");
 
     vector<Pixel> pixels = ih.loadImage();
 
@@ -160,8 +160,8 @@ int main()
 
     FordFulkerson ff(grafo);
     vector<int> minCutSet;
-
-    int maxFlow = ff.maxFlowMinCut(0, 2, minCutSet);
+    cout << grafo.getVertices()[grafo.getVertices().size()].getV() << "  " << grafo.getVertices().size() + 1 << endl;
+    int maxFlow = ff.maxFlowMinCut(grafo.getVertices().size() - 2, grafo.getVertices().size() - 1, minCutSet);
 
     cout << "Fluxo máximo: " << maxFlow << endl;
     cout << "Corte mínimo (vértices no lado do source): ";
@@ -170,6 +170,6 @@ int main()
         cout << v << " ";
     }
     cout << endl;
-
+ 
     return 0;
 }

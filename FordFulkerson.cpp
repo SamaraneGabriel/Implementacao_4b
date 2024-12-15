@@ -14,14 +14,16 @@ public:
     FordFulkerson(Grafo &grafo) {
         int n = grafo.getVertices().size();
         adj.resize(n);
-
+        int i = 0;
         // Configurar as capacidades a partir das arestas do grafo
         for (auto &aresta : grafo.getArestas()) {
+            //cout << "for it: " << i << endl;
             int u = aresta.getU();
             int v = aresta.getV();
             int w = aresta.getW();
             adj[u].emplace_back(v, w);
             adj[v].emplace_back(u, 0); // Adicionar aresta reversa para fluxo residual com capacidade 0
+            i++;
         }
     }
 
@@ -58,7 +60,6 @@ public:
         int flow = 0;
         vector<int> parent(adj.size());
         vector<int> capacity(adj.size());
-
         while (bfs(source, sink, parent, capacity)) {
             int new_flow = capacity[sink];
             flow += new_flow;
@@ -106,7 +107,7 @@ public:
             if (visited[i])
                 minCutSet.push_back(i);
         }
-
+        cout << "saiu maxflow" << endl;
         return flow;
     }
 };
