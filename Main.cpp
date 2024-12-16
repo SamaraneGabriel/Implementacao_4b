@@ -8,7 +8,7 @@
 #include <cstdlib>
 #include <cstdio>
 #include <limits>
-#include "FordFulkerson.cpp"
+#include "MaxFlow.cpp"
 
 // Para Compilar use:
 // g++ -o programa *.cpp -std=c++17
@@ -35,7 +35,7 @@ int main()
     return 1;
   }
 
-  ImageHandler ih("imagens-ppm/cachorro.ppm");
+  ImageHandler ih("imagens-ppm/golden.ppm");
 
   vector<Pixel> pixels = ih.loadImage();
 
@@ -47,10 +47,10 @@ int main()
 
   vector<Aresta> arestas = grafo.getArestas();
 
-  FordFulkerson ff(grafo);
+  MaxFlow mf(grafo);
   unordered_map<int, int> minCutSet;
   cout << grafo.getVertices()[grafo.getVertices().size()].getV() << "  " << grafo.getVertices().size() + 1 << endl;
-  int maxFlow = ff.boykovKolmogorovMinCut(grafo.getVertices().size() - 2, grafo.getVertices().size() - 1, minCutSet);
+  int maxFlow = mf.boykovKolmogorovMinCut(grafo.getVertices().size() - 2, grafo.getVertices().size() - 1, minCutSet);
 
   cout << "Fluxo máximo: " << maxFlow << endl;
   cout << "Corte mínimo (vértices no lado do source): ";

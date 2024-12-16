@@ -71,7 +71,6 @@ void aumentarCores(vector<Pixel> &coresPredefinadas, int coresIndex)
 
 void ImageHandler::saveImage(unordered_map<int, int> &hashComponentes, vector<Vertice> &vertices)
 {
-    // vector<Vertice> vertices = grafo.getVertices();
     vector<Pixel> coresPredefinadas = {
         Pixel(0, 0, static_cast<uint8_t>(255), static_cast<uint8_t>(0), static_cast<uint8_t>(0)),     // Vermelho
         Pixel(0, 0, static_cast<uint8_t>(0), static_cast<uint8_t>(255), static_cast<uint8_t>(0)),     // Verde
